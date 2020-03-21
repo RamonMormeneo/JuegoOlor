@@ -5,12 +5,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    public float movementSpeed = 3;
-    public float jumpForce = 300;
-    public float timeBeforeNextJump = 1.2f;
-    private float canJump = 0f;
+    public float movementSpeed = 10;
     Animator anim;
     Rigidbody rb;
+
+    bool hasKey = false;
     
     void Start()
     {
@@ -28,7 +27,7 @@ public class PlayerController : MonoBehaviour
         float moveHorizontal = Input.GetAxisRaw("Horizontal");
         float moveVertical = Input.GetAxisRaw("Vertical");
 
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+        Vector3 movement = new Vector3(moveHorizontal * 0.2f, 0.0f, moveVertical);
 
         if (movement != Vector3.zero)
         {
@@ -41,11 +40,28 @@ public class PlayerController : MonoBehaviour
 
         transform.Translate(movement * movementSpeed * Time.deltaTime, Space.World);
 
-        if (Input.GetButtonDown("Jump") && Time.time > canJump)
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Bone")
         {
-                rb.AddForce(0, jumpForce, 0);
-                canJump = Time.time + timeBeforeNextJump;
-                anim.SetTrigger("jump");
+
+        }
+
+        else if (collision.gameObject.tag == "Obstacle")
+        {
+
+        }
+
+        else if (collision.gameObject.tag == "Key")
+        {
+            hasKey = true;
+        }
+
+        else if (collision.gameObject.tag == "Goal")
+        {
+
         }
     }
 }
