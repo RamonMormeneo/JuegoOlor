@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
     private int a = 0;
     public GameObject FinalTarget;
 
+    bool canMove = true;
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -38,8 +40,11 @@ public class PlayerController : MonoBehaviour
 
         timer += Time.deltaTime;
         seconds = timer % 60;
-
-        ControllPlayer();
+        if(canMove == true)
+        {
+            ControllPlayer();
+        }
+        
     }
 
     void ControllPlayer()
@@ -87,6 +92,7 @@ public class PlayerController : MonoBehaviour
         else if (collision.gameObject.tag == "Obstacle")
         {
             deathCanv.SetActive(true);
+            canMove = false;
 
         }
 
