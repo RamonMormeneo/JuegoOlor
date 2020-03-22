@@ -157,6 +157,7 @@ public class PlayerController : MonoBehaviour
 
     public void retry()
     {
+        print("Ramon Ur mom Gay");
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
     }
