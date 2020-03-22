@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     float seconds;
 
     public GameObject finishCanv;
+    public GameObject deathCanv;
 
     public GameObject[] thing;
     public GameObject[] save;
@@ -85,8 +86,8 @@ public class PlayerController : MonoBehaviour
 
         else if (collision.gameObject.tag == "Obstacle")
         {
-            Scene scene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(scene.name);
+            deathCanv.SetActive(true);
+
         }
 
         else if (collision.gameObject.tag == "Key")
@@ -146,6 +147,12 @@ public class PlayerController : MonoBehaviour
     public void nextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void retry()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 
     public void returnMenu()
