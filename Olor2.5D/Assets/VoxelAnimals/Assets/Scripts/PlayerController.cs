@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     bool hasKey = false;
 
     float timer = 0.0f;
-    float seconds;
+    public float seconds;
 
     public GameObject finishCanv;
     public GameObject deathCanv;
