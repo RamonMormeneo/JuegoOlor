@@ -18,7 +18,10 @@ public class PlayerController : MonoBehaviour
 
     public GameObject finishCanv;
 
-
+    public GameObject[] thing;
+    public GameObject[] save;
+    private int a = 0;
+    public GameObject FinalTarget;
 
     void Start()
     {
@@ -53,7 +56,20 @@ public class PlayerController : MonoBehaviour
         else {
             anim.SetInteger("Walk", 0);
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            MyPath a = FinalTarget.GetComponent<MyPath>();
+            a.showPath();
+            for (int i = 0; i < thing.Length; i++)
+            {
+                if (thing[i] != null)
+                {
+                    a = thing[i].GetComponent<MyPath>();
+                    a.showPath();
+                }
+            }
 
+        }
         transform.Translate(movement * movementSpeed * Time.deltaTime, Space.World);
 
     }
@@ -88,6 +104,45 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.GetComponent<MyPath>() != null)
+        {
+
+            thing[a] = other.gameObject;
+            Debug.Log("Find");
+            a++;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.GetComponent<MyPath>() != null)
+        {
+
+            for (int i = 0; i < thing.Length; i++)
+            {
+                if (thing[i] != null && thing[i] == other.gameObject)
+                {
+                    thing[i] = null;
+                    a--;
+                }
+            }
+            ReARRay();
+        }
+    }
+    private void ReARRay()
+    {
+        int j = 0;
+        for (int i = 0; i < thing.Length; i++)
+        {
+            if (thing[i] != null)
+            {
+                save[j] = thing[i];
+                j++;
+            }
+        }
+        thing = save;
+    }
     public void nextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
