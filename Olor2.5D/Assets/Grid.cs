@@ -112,14 +112,16 @@ public class Grid : MonoBehaviour
                 {
                     Gizmos.color = Color.black;
                 }
+                else if (FinalPath != null && node.isGreen)
+                {
+                    Gizmos.color = Color.green;
+                    //node.isGreen = false;
+                }
                 else
                 {
                     Gizmos.color = Color.yellow;
                 }
-                if(FinalPath!=null)
-                {
-                    Gizmos.color = Color.green;
-                }
+               
                 Gizmos.DrawCube(node.Position, Vector3.one * (nodeDiameter - distance));
             }
         }

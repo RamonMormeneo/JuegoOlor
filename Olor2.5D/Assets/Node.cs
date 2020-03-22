@@ -8,6 +8,7 @@ public class Node
     public int gridY;
 
     public bool isWall;
+    public bool isGreen;
     public Vector3 Position;
 
     public Node Parent;
@@ -18,6 +19,7 @@ public class Node
 
     public Node(bool _isWall, Vector3 _Position, int agridX, int agridY)
     {
+        isGreen = false;
         isWall = _isWall;
         Position = _Position;
         gridX = agridX;

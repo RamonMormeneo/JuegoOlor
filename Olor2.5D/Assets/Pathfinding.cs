@@ -42,7 +42,10 @@ public class Pathfinding : MonoBehaviour
             CloseList.Add(currentNode);
             if (currentNode == Targetnode)
             {
+                currentNode.isGreen = true;
                 GetFinalPath(Startnode, Targetnode);
+                break;
+
             }
             foreach (Node neighbourNode in grid.GetNieghbour(currentNode))
             {
@@ -51,7 +54,7 @@ public class Pathfinding : MonoBehaviour
                     continue;
                 }
                 int MoveCost = currentNode.gCost + GetManhattenDistance(currentNode, neighbourNode);
-                if(MoveCost < neighbourNode.gCost || !openList.Contains(neighbourNode))
+                if(MoveCost < neighbourNode.FCost || !openList.Contains(neighbourNode))
                 {
                     neighbourNode.gCost = MoveCost;
                     neighbourNode.hCost = GetManhattenDistance(neighbourNode, Targetnode );
